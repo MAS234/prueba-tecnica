@@ -44,12 +44,10 @@ Una vez que ambos servidores estén en ejecución, podrás acceder y utilizar la
 La aplicación dispone de dos usuarios precargados, con las siguientes credenciales para iniciar sesión:
 
 Usuario: Leandro
-
 Contraseña: 1234
-Rol: Usuario
+
 
 Administrador: Miguel
-
 Contraseña: 1234
-Rol: Administrador
+
 
