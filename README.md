@@ -46,3 +46,15 @@ Ejecuta el Servidor Backend: node Api.js
 
 Una vez que ambos servidores estén en ejecución, podrás acceder y utilizar la aplicación. Asegúrate de haber iniciado tanto el servidor del frontend como el del backend para poder aprovechar todas las funcionalidades proporcionadas por la app.
 
+# Credenciales para Acceder
+La aplicación dispone de dos usuarios precargados, con las siguientes credenciales para iniciar sesión:
+
+Usuario: Leandro
+
+Contraseña: 1234
+Rol: Usuario
+Administrador: Miguel
+
+Contraseña: 1234
+Rol: Administrador
+
