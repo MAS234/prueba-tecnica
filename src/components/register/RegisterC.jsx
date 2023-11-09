@@ -10,17 +10,17 @@ function RegisterC({ register }) {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [open, setOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState("user");
+  const [selectedOption, setSelectedOption] = useState("User");
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleUserClick = (e) => {
     e.preventDefault();
-    setSelectedOption("user");
+    setSelectedOption("User");
   };
 
   const handleAdminClick = (e) => {
     e.preventDefault();
-    setSelectedOption("admin");
+    setSelectedOption("Admin");
   };
 
   const validarFormulario = (e) => {
@@ -38,6 +38,8 @@ function RegisterC({ register }) {
         .then((response) => {
           if (response) {
             setErrorMessage("");
+            localStorage.setItem('username', username);
+            localStorage.setItem('rol', selectedOption);
             navigate("/pedidos");
           } else {
             setErrorMessage("Error al registrar. Usuario ya existente u otro problema.");
@@ -125,7 +127,7 @@ function RegisterC({ register }) {
             <div className="flex justify-between items-center mb-5 mt-5">
               <button
                 className={`bg-[#48D390] hover:bg-[#2ca76c] text-white px-3 py-2 text-xl font-semibold rounded-md transition duration-200 ${
-                  selectedOption === "user" ? 'bg-[#48D390]' : 'bg-[#E5E7EB]'
+                  selectedOption === "User" ? 'bg-[#48D390]' : 'bg-[#E5E7EB]'
                 }`}
                 onClick={handleUserClick}
               >
@@ -133,7 +135,7 @@ function RegisterC({ register }) {
               </button>
               <button
                 className={`bg-[#48D390] hover:bg-[#2ca76c] text-white px-3 py-2 text-xl font-semibold rounded-md transition duration-200 ${
-                  selectedOption === "admin" ? 'bg-[#48D390]' : 'bg-[#E5E7EB]'
+                  selectedOption === "Admin" ? 'bg-[#48D390]' : 'bg-[#E5E7EB]'
                 }`}
                 onClick={handleAdminClick}
               >

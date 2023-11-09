@@ -35,3 +35,43 @@ export const fetchUserOrders = (username) => {
         });
     };
   };
+
+  // AGREGAR LOS PEDIDOS 
+  export const addNewOrder = (orderData) => {
+    return async (dispatch) => {
+      try {
+        const response = await axios.post("http://localhost:80/api/pedidos/agregar", orderData);
+        dispatch({
+          type: ADD_USER_ORDER_SUCCESS,
+          payload: response.data,
+        });
+      } catch (error) {
+        // Manejar errores, si es necesario
+      }
+    };
+  };
+
+  // PARA ELIMINAR LOS PEDIDOS
+  export const deleteUserOrder = (orderId) => {
+    return (dispatch) => {
+      dispatch({ type: DELETE_USER_ORDER_REQUEST });
+  
+      axios.delete(`http://localhost:80/api/pedidos/${orderId}`)
+        .then(() => {
+          dispatch({
+            type: DELETE_USER_ORDER_SUCCESS,
+            payload: orderId
+          });
+          console.log("exitoso eliminacion")
+        })
+        .catch((error) => {
+          dispatch({
+            type: DELETE_USER_ORDER_FAILURE,
+            payload: error.message
+          });
+          console.log("ERROR AL ELIMINAR")
+
+        });
+    };
+  };
+  

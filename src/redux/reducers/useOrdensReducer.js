@@ -2,12 +2,15 @@
 import * as ActionTypes from '../actions/useOrdensActions';
 
 const initialState = {
-  orders: [],
+  orders: {},
   loading: false,
   error: null,
 };
 
 const userOrdersReducer = (state = initialState, action) => {
+
+  let updatedOrders = [];
+
   switch (action.type) {
     case ActionTypes.FETCH_USER_ORDERS_REQUEST:
     case ActionTypes.ADD_USER_ORDER_REQUEST:
@@ -31,15 +34,17 @@ const userOrdersReducer = (state = initialState, action) => {
     case ActionTypes.ADD_USER_ORDER_SUCCESS:
       return {
         ...state,
+        orders: updatedOrders,
         loading: false,
       };
 
     // Logica para eliminar pedido del estado
     case ActionTypes.DELETE_USER_ORDER_SUCCESS:
+      updatedOrders = state.orders.filter(order => order.id !== action.payload);
       return {
         ...state,
+        orders: updatedOrders,
         loading: false,
-        
       };
 
     case ActionTypes.FETCH_USER_ORDERS_FAILURE:

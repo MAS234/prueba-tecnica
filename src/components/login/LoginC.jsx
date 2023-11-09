@@ -25,8 +25,10 @@ function LoginC({login}) {
       try {
         const response = await login({ username, password });
         setErrorMessage("");
-  
+
         if (response) {
+          localStorage.setItem('username', username);
+          localStorage.setItem('rol', response.user.rol);
           navigate("/pedidos");
         } else {
           setErrorMessage("Error: Usuario o contraseña incorrectos.");
