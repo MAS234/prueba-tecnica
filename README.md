@@ -47,6 +47,7 @@ Usuario: Leandro
 
 Contraseña: 1234
 Rol: Usuario
+
 Administrador: Miguel
 
 Contraseña: 1234
