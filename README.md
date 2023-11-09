@@ -25,12 +25,6 @@ Eliminar Pedidos: Capacidad para eliminar cualquier pedido, independientemente d
 
 Agregar:agregar nuevos pedidos.
 
-Acceso a Funcionalidades
-
-Usuario: Tiene acceso restringido a sus propios pedidos. Puede eliminarlos y agregar nuevos.
-
-Administrador: Acceso completo a todos los pedidos. Puede visualizar, eliminar y agregar pedidos de cualquier usuario.
-
 # EJECUTAR LA APLICACION
 El proceso para ejecutar la aplicación implica dos pasos principales, uno para el frontend y otro para el backend. Aquí te proporciono las instrucciones detalladas para iniciar ambas partes:
 
