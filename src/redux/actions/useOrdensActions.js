@@ -17,7 +17,6 @@ export const fetchUserOrders = (username) => {
     return (dispatch) => {
       dispatch({ type: FETCH_USER_ORDERS_REQUEST });
 
-      console.log("USUARIO NOMBRE",username)
   
       axios.get(`http://localhost:80/api/pedidos/${username}`)
         .then((response) => {
@@ -25,7 +24,6 @@ export const fetchUserOrders = (username) => {
                 type: FETCH_USER_ORDERS_SUCCESS,
                 payload: response.data
             });
-            console.log(response.data)
         })
         .catch((error) => {
           dispatch({

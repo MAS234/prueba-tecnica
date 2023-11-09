@@ -26,9 +26,7 @@ function PedidosC({ fetchUserOrdersAction, userOrders, deleteUserOrder }) {
 
   // GUARDA EN EL ESTADO ORDERS 
   useEffect(() => {
-    console.log(userOrders)
     const pedidosUsuario  = userOrders.pedidoFinal;
-    console.log("PEDIDOS",pedidosUsuario)
       setOrders(pedidosUsuario);
   }, [userOrders]);
 
@@ -63,7 +61,7 @@ function PedidosC({ fetchUserOrdersAction, userOrders, deleteUserOrder }) {
       <div
         key={order.id}
         className="max-w-sm w-full lg:max-w-md rounded-lg overflow-hidden shadow-lg hover:shadow-[#48D390] duration-200"
-        style={{ flex: '0 0 calc(33.333% - 1rem)' }}
+        
       >
         <h3 className="text-center mt-5 text-[#48D390] font-bold text-xl">Pedido</h3>
         <div className="p-5 font-medium text-gray-600">
@@ -90,7 +88,7 @@ function PedidosC({ fetchUserOrdersAction, userOrders, deleteUserOrder }) {
 PedidosC.propTypes = {
   fetchUserOrdersAction: PropTypes.func.isRequired,
   userOrders: PropTypes.object.isRequired,
-  deleteUserOrder: PropTypes.object.isRequired,
+  deleteUserOrder: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {

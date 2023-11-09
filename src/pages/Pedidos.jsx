@@ -40,25 +40,18 @@ function Pedidos({  addUserOrderAction  }) {
   return (
     <>
       {/* Navbar de la app  */}
-      <div className="flex justify-between pl-5 pr-5 items-center">
-        <Logo />
+      <div className="flex flex-col lg:flex-row justify-between px-5 items-center sm:px-10 md:px-20">
+  <Logo />
+  <div className="w-full lg:w-96 flex justify-center sm:justify-start items-center gap-5 mt-3 sm:mt-0">
+    <div className="cursor-pointer bg-[#48D390] p-2 rounded-md hover:bg-[#208554] duration-200 w-full  sm:text-left  lg:mb-0" onClick={openModal}>
+      <p className="text-white font-semibold text-sm sm:text-xl lg:text-base  text-center">AGREGAR PEDIDO</p>
+    </div>
+    <Link to={"/"} className="bg-[#48D390] p-2 rounded-md hover:bg-red-500 duration-200 w-full text-center sm:text-left">
+      <p className="text-white font-semibold text-sm sm:text-xl lg:text-base uppercase text-center">cerrar sesión</p>
+    </Link>
+  </div>
+</div>
 
-        <div className="w-96 flex justify-center items-center gap-5">
-          <div className= "cursor-pointer bg-[#48D390] p-2 rounded-md hover:bg-[#208554] duration-200" onClick={openModal}>
-          <p className="text-white font-semibold text-xl uppercase">
-              AGREGAR PEDIDO
-            </p>
-          </div>
-          <Link
-            to={"/"}
-            className="bg-[#48D390] p-2 rounded-md hover:bg-red-500 duration-200"
-          >
-            <p className="text-white font-semibold text-xl uppercase">
-              cerrar sesion
-            </p>
-          </Link>
-        </div>
-      </div>
 
       {isModalOpen && (
         <Modal
@@ -69,7 +62,7 @@ function Pedidos({  addUserOrderAction  }) {
         />
       )}
 
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center mt-5">
         <PedidosC />
       </div>
 
@@ -79,8 +72,8 @@ function Pedidos({  addUserOrderAction  }) {
 }
 
 Pedidos.propTypes = {
-  userOrders: PropTypes.func.isRequired,
-  addUserOrderAction: PropTypes.object.isRequired,
+  userOrders: PropTypes.object.isRequired,
+  addUserOrderAction: PropTypes.func.isRequired,
 
 };
 
