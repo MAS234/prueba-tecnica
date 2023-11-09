@@ -1,31 +1,17 @@
 import { useState } from "react";
+import { register } from "../../redux/actions/userActions";
+import { connect } from "react-redux";
+import PropTypes from 'prop-types';
+import { useNavigate } from "react-router-dom";
 
-function RegisterC() {
-  const [nombre, setNombre] = useState("");
+function RegisterC({ register }) {
+  const navigate = useNavigate();
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmarPassword, setConfimarPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [open, setOpen] = useState(false);
-
-  console.log(open);
-
-  // VALIDACIONES
-  const validarFormulario = (e) => {
-    e.preventDefault();
-
-    if (nombre === "" || password === "" || confirmarPassword === "") {
-      setOpen(true);
-    } else {
-      setOpen(false);
-      if (password === confirmarPassword) {
-        setOpen(true);
-      } else {
-        setOpen(false);
-      }
-    }
-  };
-
-  //   BTN SLIDER
   const [selectedOption, setSelectedOption] = useState("user");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleUserClick = (e) => {
     e.preventDefault();
@@ -37,6 +23,37 @@ function RegisterC() {
     setSelectedOption("admin");
   };
 
+  const validarFormulario = (e) => {
+    e.preventDefault();
+  
+    if (username === "" || password === "" || confirmPassword === "") {
+      setOpen(true);
+      setErrorMessage("Por favor, complete todos los campos.");
+    } else if (password !== confirmPassword) {
+      setOpen(true);
+      setErrorMessage("Las contraseñas no coinciden");
+    } else {
+      setOpen(false);
+      register({ username, password, rol: selectedOption })
+        .then((response) => {
+          if (response) {
+            setErrorMessage("");
+            navigate("/pedidos");
+          } else {
+            setErrorMessage("Error al registrar. Usuario ya existente u otro problema.");
+          }
+        })
+        .catch((error) => {
+          if (error.response && error.response.status === 400) {
+            setErrorMessage("Usuario ya existente.");
+          } else {
+            setErrorMessage("Error al registrar. Inténtelo de nuevo.");
+          }
+        });
+    }
+  };
+  
+
   return (
     <>
       <div className="w-full md:w-96 h-full flex items-center justify-center">
@@ -47,6 +64,8 @@ function RegisterC() {
           <form action="">
             {/* Nombre */}
             <div className="flex flex-col space-y-3">
+              {/* Nombre */}
+            <div className="flex flex-col space-y-3">
               <label htmlFor="nombre" className="text-[#48D390] font-semibold text-xl">
                 Nombre
               </label>
@@ -55,7 +74,7 @@ function RegisterC() {
                 id="nombre"
                 className="w-full h-10 p-2 rounded-md border-2 border-solid border-gray-400 text-[#48D390] font-semibold"
                 placeholder="Ingrese su nombre"
-                onChange={(e) => setNombre(e.target.value)}
+                onChange={(e) => setUsername(e.target.value)}
               />
               <div className="h-5">
                 {open && (
@@ -93,7 +112,7 @@ function RegisterC() {
                 id="confirmar"
                 className="w-full h-10 p-2 rounded-md border-2 border-solid border-gray-400 text-[#48D390]"
                 placeholder="Confirme su contraseña"
-                onChange={(e) => setConfimarPassword(e.target.value)}
+                onChange={(e) => setConfirmPassword(e.target.value)}
               />
               <div className="h-5">
                 {open && (
@@ -122,6 +141,9 @@ function RegisterC() {
               </button>
             </div>
 
+            </div>
+
+            {/* Botón de registro */}
             <div className="flex justify-end">
               <button
                 type="button"
@@ -131,6 +153,13 @@ function RegisterC() {
                 Registrarse
               </button>
             </div>
+
+            {errorMessage && (
+              <div className="text-red-500 text-center mt-3 font-semibold">
+                {errorMessage}
+              </div>
+            )}
+
           </form>
         </div>
       </div>
@@ -138,4 +167,12 @@ function RegisterC() {
   );
 }
 
-export default RegisterC;
+RegisterC.propTypes = {
+  register: PropTypes.func.isRequired,
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  register: (userData) => dispatch(register(userData)),
+});
+
+export default connect(null, mapDispatchToProps)(RegisterC);

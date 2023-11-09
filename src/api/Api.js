@@ -1,7 +1,10 @@
 import express from "express";
+import cors from 'cors';
+
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 
 // ARRAY DE PEDIDOS 
@@ -13,6 +16,14 @@ const pedidos = [
     producto: "Bateria",
     estado: true
   },
+  {
+    id: 2,
+    nombreUser: "Leandro",
+    nombreCliente: "Pedro",
+    producto: "Motor",
+    estado: true
+  },
+  
 ];
 
 // ARRAY DE USUARIOS 
@@ -39,18 +50,20 @@ app.get("/api/usuarios", (req, res) => {
 
 // LOGUEO
 app.post("/api/login", (req, res) => {
+  const { username, password } = req.body;
 
-  const {username, password} = req.body;
+  const user = users.find(user => user.username === username);
 
-  const user = users.find(user => user.username === username)
+  if (!user) {
+    return res.status(401).json({ error: "Usuario no encontrado", username, password });
+  }
 
-  if(!user) return res.status(401).send("usuario no encontrado");
+  if (user.password !== password) {
+    return res.status(401).json({ error: "Contraseña incorrecta" });
+  }
 
-  if(user.password !== password) return res.status(401).send("Contraseña incorrecta");
-
-  res.json({message:"Inicio exitoso"})
-  res.send(users)
-})
+  res.json({ message: "Inicio exitoso", user });
+});
 
 // REGISTRO
 app.post("/api/register", (req, res) => {
@@ -100,7 +113,7 @@ app.post("/api/pedidos/agregar", (req, res) => {
 app.get("/api/pedidos/:username", (req, res) => {
   const username = req.params.username;
   const pedidosUsuario = pedidos.filter(pedido => pedido.nombreUser === username);
-  res.send(pedidosUsuario)
+  res.json({ message: "estos son los pedidos", pedidosUsuario });
 })
 
 // ELIMINAR PEDIDO DE USUARIO 

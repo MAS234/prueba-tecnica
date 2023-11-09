@@ -1,14 +1,12 @@
-import orden from "../assets/orden.png";
 import box from "../assets/box-removebg-preview.png";
 import { Link } from "react-router-dom";
+import Logo from "../components/logo/Logo";
 
 function Bienvenida() {
   return (
     <>
-      <div className="lg:m-5 m-2 flex items-center justify-start">
-        <h2 className="font-bold text-2xl text-[#48D390]">AppPedilo</h2>
-        <img src={orden} alt="orden" className="w-20 h-20" />
-      </div>
+
+    <Logo/>
 
       <h1 className="lg:text-5xl text-3xl mt-20 font-bold text-center text-[#48D390]">
         Bienvenido a su aplicación de pedidos

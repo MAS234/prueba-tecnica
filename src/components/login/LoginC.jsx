@@ -1,18 +1,39 @@
 import { useState } from "react";
+import { login } from "../../redux/actions/userActions";
+import {connect} from "react-redux"
+import PropTypes from 'prop-types';
+import { useNavigate } from "react-router-dom";
 
-function LoginC() {
-  const [nombre, setNombre] = useState("");
+function LoginC({login}) {
+
+
+  const navigate = useNavigate();
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [open, setOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   // VALIDACIONES
-  const validarFormulario = (e) => {
+  const validarFormulario = async (e) => {
     e.preventDefault();
-
-    if (nombre === "" || password === "") {
+  
+    if (username === "" || password === "") {
       setOpen(true);
+      setErrorMessage("Por favor, complete todos los campos.");
     } else {
       setOpen(false);
+      try {
+        const response = await login({ username, password });
+        setErrorMessage("");
+  
+        if (response) {
+          navigate("/pedidos");
+        } else {
+          setErrorMessage("Error: Usuario o contraseña incorrectos.");
+        }
+      } catch (error) {
+        setErrorMessage("Error al iniciar sesión. Inténtalo de nuevo.");
+      }
     }
   };
 
@@ -31,7 +52,7 @@ function LoginC() {
               id="nombre"
               className="w-full h-10 p-2 rounded-md border-2 border-solid border-gray-400 text-[#48D390]"
               placeholder="Ingrese su nombre"
-              onChange={(e) => setNombre(e.target.value)}
+              onChange={(e) => setUsername(e.target.value)}
             />
             <div className="h-5">
               {open && (
@@ -68,10 +89,26 @@ function LoginC() {
               Loguearse
             </button>
           </div>
+
+          {errorMessage && (
+            <div className="text-red-500 text-center mt-3 font-semibold">
+              {errorMessage}
+            </div>
+          )}
+
         </form>
       </div>
     </div>
   );
 }
 
-export default LoginC;
+LoginC.propTypes = {
+  login: PropTypes.func.isRequired,
+};
+
+
+const mapDispatchToProps = (dispatch) => ({
+  login: (userData) => dispatch(login(userData)),
+});
+
+export default connect(null, mapDispatchToProps)(LoginC);
