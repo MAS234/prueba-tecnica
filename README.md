@@ -28,6 +28,8 @@ Agregar:agregar nuevos pedidos.
 # EJECUTAR LA APLICACION
 El proceso para ejecutar la aplicación implica dos pasos principales, uno para el frontend y otro para el backend. Aquí te proporciono las instrucciones detalladas para iniciar ambas partes:
 
+Primero clonar el proyecto y una vez clonado, instalar las dependecias del proyecto con el comando: npm install o npm i
+
 Para el Frontend:
 Abre la Terminal:
 Dirígete a la carpeta raíz del proyecto.
