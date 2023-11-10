@@ -40,7 +40,7 @@ function LoginC({login}) {
   };
 
   return (
-    <div className="w-full md:w-96 h-[70vh] flex items-center justify-center">
+    <div className="w-full md:w-96 h-[70vh] flex items-center justify-center" data-aos="zoom-in">
       <div className="w-[22rem] md:w-96 h-full bg-white rounded-md shadow-lg shadow-gray-900 p-5">
         <h1 className="text-4xl font-bold text-center text-[#48D390] mb-5">Login</h1>
         <form action="">

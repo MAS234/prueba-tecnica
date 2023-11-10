@@ -8,13 +8,14 @@ function Bienvenida() {
 
     <Logo/>
 
-      <h1 className="lg:text-5xl text-3xl mt-20 font-bold text-center text-[#48D390]">
+      <h1 className="lg:text-5xl text-3xl mt-20 font-bold text-center text-[#48D390]" data-aos="zoom-in">
         Bienvenido a su aplicación de pedidos
       </h1>
 
       <div
         type="button"
         className="flex flex-col md:flex-row  justify-center items-center mt-16 gap-5"
+        data-aos="zoom-in"
       >
         <Link
         to={"/register"}
@@ -29,7 +30,7 @@ function Bienvenida() {
         </Link>
       </div>
 
-      <div className="fixed bottom-0 w-full flex justify-between items-center">
+      <div className="fixed bottom-0 w-full flex justify-between items-center" data-aos="fade-up">
         <img src={box} alt="box1" className="w-28 h-28 m-5" />
         <img src={box} alt="box1" className="w-28 h-28 m-5 scale-x-[-1]" />
       </div>

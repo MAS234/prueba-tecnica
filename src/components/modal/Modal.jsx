@@ -1,6 +1,23 @@
 import PropTypes from "prop-types";
+import { useState } from "react";
 
 function Modal({ closeModal, handleInputChange, handleAddOrder, newOrder }) {
+
+    // ESTADOS 
+    const [producto, setProducto] = useState("");
+    const [nombreCliente, setnombreCliente] = useState("");
+    const [nombre, setNombre] = useState("");
+    const [open, setOpen] = useState(false);
+
+    const validation = () =>{
+        if(producto === "" || nombre === "" || nombreCliente === ""){
+            setOpen(true)
+        }else{
+            handleAddOrder()
+            setOpen(false)
+        }
+    }
+
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
       <div className="bg-[#48D390] p-8 rounded-md">
@@ -19,8 +36,12 @@ function Modal({ closeModal, handleInputChange, handleAddOrder, newOrder }) {
               type="text"
               name="nombreUser"
               value={newOrder.nombreUser}
-              onChange={handleInputChange}
-            />
+              onChange={(e) => {
+                handleInputChange(e); 
+                setNombre(e.target.value); 
+              }}
+              placeholder="Nombre del admin o usuario"
+              />
           </label>
           <label className="text-white">
             Nombre del Cliente:
@@ -29,7 +50,11 @@ function Modal({ closeModal, handleInputChange, handleAddOrder, newOrder }) {
               type="text"
               name="nombreCliente"
               value={newOrder.nombreCliente}
-              onChange={handleInputChange}
+              onChange={(e) => {
+                handleInputChange(e); 
+                setnombreCliente(e.target.value); 
+              }}
+              placeholder="Nombre del Cliente"
             />
           </label>
           <label className="text-white">
@@ -39,16 +64,24 @@ function Modal({ closeModal, handleInputChange, handleAddOrder, newOrder }) {
               type="text"
               name="producto"
               value={newOrder.producto}
-              onChange={handleInputChange}
+              onChange={(e) => {
+                handleInputChange(e); 
+                setProducto(e.target.value); 
+              }}
+              placeholder="Producto"
             />
           </label>
+          <div className="h-8">
+          {open && <p className="text-red-600 text-sm m-5 font-bold">COMPLETE TODOS LOS CAMPOS</p>}
+          </div>
           <button
           type="button"
             className="bg-[#48D390] hover:bg-white  hover:text-[#48D390] text-white  rounded-md p-2 duration-200 font-bold"
-            onClick={handleAddOrder}
+            onClick={validation}
           >
             Agregar Pedido
           </button>
+
         </form>
       </div>
     </div>

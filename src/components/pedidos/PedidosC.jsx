@@ -56,7 +56,7 @@ function PedidosC({ fetchUserOrdersAction, userOrders, deleteUserOrder }) {
 
       {/* Mostrar los pedidos */}
       {Array.isArray(orders) ? (
-  <div className="w-full mt-10 lg:flex lg:flex-wrap flex-row justify-center gap-5">
+  <div className="w-full mt-10 lg:flex lg:flex-wrap flex-row justify-center gap-5" data-aos="zoom-in">
     {orders.map((order) => (
       <div
         key={order.id}
@@ -79,7 +79,7 @@ function PedidosC({ fetchUserOrdersAction, userOrders, deleteUserOrder }) {
     ))}
   </div>
 ) : (
-  <p>No hay pedidos disponibles.</p>
+  <p className="text-center text-xl font-bold text-red-500">Recargue la pagina</p>
 )}
     </div>
   );
