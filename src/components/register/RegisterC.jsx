@@ -13,6 +13,8 @@ function RegisterC({ register }) {
   const [selectedOption, setSelectedOption] = useState("User");
   const [errorMessage, setErrorMessage] = useState("");
 
+  console.log(errorMessage)
+
   const handleUserClick = (e) => {
     e.preventDefault();
     setSelectedOption("User");
@@ -59,7 +61,7 @@ function RegisterC({ register }) {
   return (
     <>
       <div className="w-full md:w-96 h-full flex items-center justify-center" data-aos="zoom-in">
-        <div className="w-[22rem] md:w-96 bg-white rounded-md shadow-lg shadow-gray-900 p-5">
+        <div className="w-[22rem] md:w-96 bg-white rounded-md shadow-lg shadow-gray-900 p-2">
           <h1 className="text-4xl font-bold text-center text-[#48D390] mb-5">
             Registro
           </h1>
@@ -156,11 +158,6 @@ function RegisterC({ register }) {
               </button>
             </div>
 
-            {errorMessage && (
-              <div className="text-red-500 text-center mt-3 font-semibold">
-                {errorMessage}
-              </div>
-            )}
 
           </form>
         </div>
